@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  # ------------------------------
+  # Application
+  # ------------------------------
+  nijiapi:
+    env_file:
+      - nijiapi/.env
+    build:
+      context: .
+      dockerfile: Dockerfile
+    tty: true
+    stdin_open: true
+    command:
+      - sh
+      - -c
+      - python manage.py runserver 0.0.0.0:8888
+    volumes:
+      - .:/nijiapi
+    ports:
+      - "8888:8888"
+    expose:
+      - "8888"
+    depends_on:
+      - db
+
+  # ------------------------------
+  # Database
+  # ------------------------------
+  db:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      TZ: "Asia/Tokyo"
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/logs:/var/log/mysql

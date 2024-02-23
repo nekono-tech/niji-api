@@ -1,0 +1,6 @@
+# Database
+mysql
+
+# Django
+__pycache__/
+.env
