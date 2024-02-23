@@ -4,3 +4,7 @@ mysql
 # Django
 __pycache__/
 .env
+
+# Other
+env/
+.idea/
