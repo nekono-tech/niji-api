@@ -6,6 +6,7 @@ class Talent(models.Model):
     slug = models.CharField(max_length=100, default='')
     debut_at = models.DateTimeField(null=True, default=None)
     fanclub_url = models.URLField(default='')
+    affiliation = models.CharField(max_length=20, default='')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

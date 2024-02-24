@@ -9,4 +9,4 @@ class TalentSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Talent
-        fields = ('id', 'name')
+        fields = ('id', 'name', 'name_en', 'slug', 'debut_at', 'fanclub_url', 'affiliation', 'created_at', 'updated_at')

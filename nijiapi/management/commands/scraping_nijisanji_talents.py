@@ -54,12 +54,16 @@ class Command(BaseCommand):
           - orderbyEnName   : 不明
         """
 
+        # debutAt の昇順でソート
+        all_livers = sorted(all_livers, key=lambda x: x['profile']['debutAt'])
+
         # Talent モデルにデータを保存していく
         # ただし、既に存在している場合は更新する
         for liver in all_livers:
             name = liver['name'] if liver.get('name') else ''
             name_en = liver['enName'] if liver.get('enName') else ''
             slug = liver['slug'] if liver.get('slug') else ''
+            affiliation = liver['profile'].get('affiliation', '')
             debut_at = liver['profile'].get('debutAt', None)
             fanclub_url = liver['socialLinks'].get('fanclub', '')
 
@@ -69,6 +73,7 @@ class Command(BaseCommand):
                 defaults={
                     'name_en': name_en,
                     'slug': slug,
+                    'affiliation': affiliation,
                     'debut_at': debut_at,
                     'fanclub_url': fanclub_url
                 }
