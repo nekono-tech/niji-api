@@ -73,7 +73,7 @@ class Command(BaseCommand):
                 defaults={
                     'name_en': name_en,
                     'slug': slug,
-                    'affiliation': affiliation,
+                    'affiliation': affiliation[0],
                     'debut_at': debut_at,
                     'fanclub_url': fanclub_url
                 }
