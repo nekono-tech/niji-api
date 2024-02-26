@@ -60,29 +60,23 @@ class Command(BaseCommand):
         # Talent モデルにデータを保存していく
         # ただし、既に存在している場合は更新する
         for liver in all_livers:
-            name = liver['name'] if liver.get('name') else ''
-            name_en = liver['enName'] if liver.get('enName') else ''
             slug = liver['slug'] if liver.get('slug') else ''
             affiliation = liver['profile'].get('affiliation', '')
             debut_at = liver['profile'].get('debutAt', None)
-            fanclub_url = liver['socialLinks'].get('fanclub', '')
 
             # タレントを検索し、一致する場合は更新、それ以外の場合は新規作成
             talent, created = Talent.objects.update_or_create(
-                name=name,
+                slug=slug,
                 defaults={
-                    'name_en': name_en,
-                    'slug': slug,
                     'affiliation': affiliation[0],
                     'debut_at': debut_at,
-                    'fanclub_url': fanclub_url
                 }
             )
 
             if created:
-                print(f'{talent.name} を新規作成しました')
+                print(f'{talent.slug} を新規作成しました')
             else:
-                print(f'{talent.name} を更新しました')
+                print(f'{talent.slug} を更新しました')
 
             talent.save()
 
